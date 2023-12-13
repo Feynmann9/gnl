@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: matran-d <matran-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:31:37 by matran-d          #+#    #+#             */
-/*   Updated: 2023/12/13 17:31:38 by matran-d         ###   ########.fr       */
+/*   Updated: 2023/12/13 18:01:17 by matran-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <get_next_line.h>
+#include <get_next_line_bonus.h>
 
 size_t	ft_strlen(const char *str)
 {

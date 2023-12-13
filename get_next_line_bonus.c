@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: matran-d <matran-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:31:21 by matran-d          #+#    #+#             */
-/*   Updated: 2023/12/13 17:31:27 by matran-d         ###   ########.fr       */
+/*   Updated: 2023/12/13 18:01:14 by matran-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char    *ft_maj_range(char *range)
 {
@@ -87,14 +87,14 @@ char    *ft_second_range(char *range)
 char    *get_next_line(int fd)
 {
     char    *line;
-    static char     *range;
+    static char     *range[1024];
 
-    if (fd < 0 || BUFFER_SIZE <= 0)
+    if (fd < 0 || BUFFER_SIZE <= 0 || fd >= 1024)
         return (0);
-    range = ft_lire_range(fd, range);
+    range[fd] = ft_lire_range(fd, range[fd]);
     if (!range)
         return (NULL);
-    line = ft_maj_range(range);
-    range = ft_second_range(range);
+    line = ft_maj_range(range[fd]);
+    range[fd] = ft_second_range(range[fd]);
     return (line);
 }
