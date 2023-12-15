@@ -6,7 +6,7 @@
 /*   By: matran-d <matran-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:31:37 by matran-d          #+#    #+#             */
-/*   Updated: 2023/12/15 21:04:17 by matran-d         ###   ########.fr       */
+/*   Updated: 2023/12/16 00:32:21 by matran-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,26 +48,29 @@ char	*ft_strchr(char *str, int c)
 char	*ft_strjoin(char *s1, char *s2)
 {
 	int		i;
-	// int		j;
+	int		c;
 	char	*str;
 	int		len;
-	
-	// if (!s1)
-	// 	return (NULL);
+
 	len = ft_strlen(s1) + ft_strlen(s2);
-	str = malloc(sizeof(char) * (len + 1));
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (s1[i])
+	if (!s1)
 	{
-		str[i] = s1[i];
-		i++;
+		s1 = (char *)malloc(1 * sizeof(char));
+		s1[0] = '\0';
 	}
-	// j = 0;
-	// while (s2[j])
-	// 	str[i++] = s2[j++];
-	str[len] = 0;
-	// free(s2);pense a free lancien malloc de range;
+	if (!s1 || !s2)
+		return (NULL);
+	str = malloc(sizeof(char) * (len + 1));
+	if (str == NULL)
+		return (NULL);
+	i = -1;
+	c = 0;
+	if (s1)
+		while (s1[++i] != '\0')
+			str[i] = s1[i];
+	while (s2[c] != '\0')
+		str[i++] = s2[c++];
+	str[len] = '\0';
+	free(s1);
 	return (str);
 }

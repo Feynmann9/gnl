@@ -6,13 +6,13 @@
 /*   By: matran-d <matran-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:31:21 by matran-d          #+#    #+#             */
-/*   Updated: 2023/12/15 20:59:52 by matran-d         ###   ########.fr       */
+/*   Updated: 2023/12/16 00:41:02 by matran-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <fcntl.h>
-#include <stdio.h>
+//#include <fcntl.h>
+//#include <stdio.h>
 
 char	*ft_maj_range(char *range)
 {
@@ -26,18 +26,18 @@ char	*ft_maj_range(char *range)
 		i++;
 	str = malloc(sizeof(char) * (i + 2));
 	if (!str)
-	{
-		free(str);
 		return (NULL);
-	}
 	i = 0;
 	while (range[i] && range[i] != '\n')
 	{
 		str[i] = range[i];
 		i++;
 	}
-	if (range[i++] == '\n')
+	if (range[i] == '\n')
+	{
 		str[i] = range[i];
+		i++;
+	}
 	str[i] = '\0';
 	return (str);
 }
@@ -49,10 +49,7 @@ char	*ft_lire_range(int fd, char *range)
 
 	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buff)
-	{
-		free(buff);
 		return (NULL);
-	}
 	i = 1;
 	while (!ft_strchr(range, '\n') && i != 0)
 	{
@@ -63,7 +60,7 @@ char	*ft_lire_range(int fd, char *range)
 			return (NULL);
 		}
 		buff[i] = '\0';
-		range = ft_strjoin(buff, range);
+		range = ft_strjoin(range, buff);
 	}
 	free(buff);
 	return (range);
@@ -77,20 +74,21 @@ char	*ft_second_range(char *range)
 
 	i = 0;
 	if (!range[i])
+	{
+		free(range);
 		return (NULL);
+	}
 	while (range[i] && range[i] != '\n')
 		i++;
 	str = malloc(sizeof(char) * (ft_strlen(range) - i + 1));
 	if (!str)
-	{
-		free(str);
 		return (NULL);
-	}
 	i++;
 	j = 0;
 	while (range[i])
 		str[j++] = range[i++];
 	str[j] = '\0';
+	free(range);
 	return (str);
 }
 
@@ -109,7 +107,7 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-int 	main(void)
+/*int 	main(void)
 {
 	int fd;
 	char *str;
@@ -126,3 +124,4 @@ int 	main(void)
 	free(str);
 	close(fd);
 }
+*/
