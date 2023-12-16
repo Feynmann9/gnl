@@ -6,7 +6,7 @@
 /*   By: matran-d <matran-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:31:21 by matran-d          #+#    #+#             */
-/*   Updated: 2023/12/15 20:25:43 by matran-d         ###   ########.fr       */
+/*   Updated: 2023/12/16 21:19:30 by matran-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,11 @@ char	*ft_maj_range(char *range)
 		str[i] = range[i];
 		i++;
 	}
-	if (range[i++] == '\n')
+	if (range[i] == '\n')
+	{
 		str[i] = range[i];
+		i++;
+	}
 	str[i] = '\0';
 	return (str);
 }
@@ -68,16 +71,16 @@ char	*ft_second_range(char *range)
 	char	*str;
 
 	i = 0;
-	if (!range[i])
-		return (NULL);
 	while (range[i] && range[i] != '\n')
 		i++;
-	str = malloc(sizeof(char) * (ft_strlen(range) - i + 1));
-	if (!str)
+	if (!range[i])
 	{
-		free(str);
+		free(range);
 		return (NULL);
 	}
+	str = malloc(sizeof(char) * (ft_strlen(range) - i + 1));
+	if (!str)
+		return (NULL);
 	i++;
 	j = 0;
 	while (range[i])
@@ -95,7 +98,7 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= 1024)
 		return (NULL);
 	range[fd] = ft_lire_range(fd, range[fd]);
-	if (!range)
+	if (!range[fd])
 		return (NULL);
 	line = ft_maj_range(range[fd]);
 	range[fd] = ft_second_range(range[fd]);

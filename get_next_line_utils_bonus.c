@@ -6,15 +6,15 @@
 /*   By: matran-d <matran-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:31:37 by matran-d          #+#    #+#             */
-/*   Updated: 2023/12/15 17:49:12 by matran-d         ###   ########.fr       */
+/*   Updated: 2023/12/16 21:01:52 by matran-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-size_t	ft_strlen(const char *str)
+int	ft_strlen(char *str)
 {
-	size_t	i;
+	int	i;
 
 	if (!str)
 		return (0);
@@ -24,7 +24,7 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strchr(const char *str, int c)
+char	*ft_strchr(char *str, int c)
 {
 	int	i;
 
@@ -44,23 +44,32 @@ char	*ft_strchr(const char *str, int c)
 	return (0);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	int		i;
-	int		j;
+	int		c;
 	char	*str;
-	
+	int		len;
+
+	len = ft_strlen(s1) + ft_strlen(s2);
+	if (!s1)
+	{
+		s1 = (char *)malloc(1 * sizeof(char));
+		s1[0] = '\0';
+	}
 	if (!s1 || !s2)
 		return (NULL);
-	i = 0;
-	j = 0;
-	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!str)
+	str = malloc(sizeof(char) * (len + 1));
+	if (str == NULL)
 		return (NULL);
-	while (s1[i++] != '\0')
-		str[i] = s1[i];
-	while (s2[j++] != '\0')
-		str[i + j] = s2[j];
-	str[i + j] = '\0';
+	i = -1;
+	c = 0;
+	if (s1)
+		while (s1[++i] != '\0')
+			str[i] = s1[i];
+	while (s2[c] != '\0')
+		str[i++] = s2[c++];
+	str[len] = '\0';
+	free(s1);
 	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: matran-d <matran-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:31:21 by matran-d          #+#    #+#             */
-/*   Updated: 2023/12/16 00:41:02 by matran-d         ###   ########.fr       */
+/*   Updated: 2023/12/16 21:17:14 by matran-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ char	*ft_second_range(char *range)
 	char	*str;
 
 	i = 0;
+	while (range[i] && range[i] != '\n')
+		i++;
 	if (!range[i])
 	{
 		free(range);
 		return (NULL);
 	}
-	while (range[i] && range[i] != '\n')
-		i++;
 	str = malloc(sizeof(char) * (ft_strlen(range) - i + 1));
 	if (!str)
 		return (NULL);
